@@ -1,0 +1,66 @@
+{
+  "selected_model": "Random forest",
+  "risk_threshold": 0.5499999999999999,
+  "test_metrics_at_selected_threshold": {
+    "roc_auc": 0.9999994894682404,
+    "average_precision": 0.9999997584068381,
+    "accuracy": 0.9996663329996663,
+    "balanced_accuracy": 0.9994807892004154,
+    "risk_recall": 1.0,
+    "risk_precision": 0.9995085995085995,
+    "risk_f2": 0.9999016812506145,
+    "survival_recall": 0.9989615784008308,
+    "brier": 0.0055467008646757285,
+    "tn": 962,
+    "fp": 1,
+    "fn": 0,
+    "tp": 2034
+  },
+  "bootstrap": {
+    "Dummy baseline": {
+      "auc_95_percentile_interval": [
+        0.5,
+        0.5
+      ],
+      "winner_minus_model_auc_interval": [
+        0.4999969920737727,
+        0.5
+      ]
+    },
+    "Logistic regression": {
+      "auc_95_percentile_interval": [
+        0.8585823357356526,
+        0.8860277482148665
+      ],
+      "winner_minus_model_auc_interval": [
+        0.11397120408785222,
+        0.14141766426434738
+      ]
+    },
+    "Random forest": {
+      "auc_95_percentile_interval": [
+        0.9999969920737727,
+        1.0
+      ],
+      "winner_minus_model_auc_interval": [
+        0.0,
+        0.0
+      ]
+    },
+    "Gradient boosting": {
+      "auc_95_percentile_interval": [
+        0.9999852665458832,
+        1.0
+      ],
+      "winner_minus_model_auc_interval": [
+        0.0,
+        1.2518699281727214e-05
+      ]
+    }
+  },
+  "python": "3.11.14",
+  "sklearn": "1.6.1",
+  "seed": 42,
+  "threshold_objective": "training out-of-fold non-survival F2",
+  "selection_objective": "training cross-validation mean non-survival average precision"
+}

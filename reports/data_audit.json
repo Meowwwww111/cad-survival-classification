@@ -1,0 +1,55 @@
+{
+  "rows": 15000,
+  "unique_patient_ids": 14042,
+  "independent_groups": 14040,
+  "exact_duplicate_rows": 0,
+  "duplicate_cleaned_predictors": 2,
+  "ids_with_conflicting_outcomes": 375,
+  "survival_count": 4815,
+  "non_survival_count": 10185,
+  "negative_age_count": 430,
+  "missing_after_cleaning": {
+    "Age": 430,
+    "Sodium": 0,
+    "Creatinine": 499,
+    "Platelets": 0,
+    "Creatine phosphokinase": 0,
+    "Blood Pressure": 0,
+    "Hemoglobin": 0,
+    "Height": 0,
+    "Weight": 0,
+    "Gender": 0,
+    "Smoke": 0,
+    "Diabetes": 0,
+    "Ejection Fraction": 0
+  },
+  "raw_categories": {
+    "Gender": [
+      "Female",
+      "Male"
+    ],
+    "Smoke": [
+      "NO",
+      "No",
+      "YES",
+      "Yes"
+    ],
+    "Diabetes": [
+      "Diabetes",
+      "Normal",
+      "Pre-diabetes"
+    ],
+    "Ejection Fraction": [
+      "High",
+      "L",
+      "Low",
+      "N",
+      "Normal"
+    ]
+  },
+  "source_sha256": "c1cadd2f8c641bb41961c3c6df8a8447b9cfe61e2a8cf63482ab2d3aca3108f5",
+  "train_rows": 12003,
+  "test_rows": 2997,
+  "train_risk_prevalence": 0.6790802299425144,
+  "test_risk_prevalence": 0.6786786786786787
+}
