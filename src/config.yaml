@@ -1,0 +1,45 @@
+# Paths are relative to the project root, regardless of the current directory.
+file_path: data/classification_bonus_practice_data.csv
+output_dir: reports
+model_dir: models
+random_state: 42
+holdout_folds: 5  # First grouped stratified fold is the approximately 20% test set.
+cv: 5
+n_jobs: 2
+bootstrap_repetitions: 500
+threshold_grid:
+  start: 0.05
+  stop: 0.95
+  count: 91
+numerical_features:
+  - Age
+  - Sodium
+  - Creatinine
+  - Platelets
+  - Creatine phosphokinase
+  - Blood Pressure
+  - Hemoglobin
+  - Height
+  - Weight
+nominal_features:
+  - Gender
+  - Smoke
+  - Diabetes
+  - Ejection Fraction
+# Outcome and ID conventions are fixed to this dataset in data_preparation.py.
+# Selection criterion: cross-validation average precision for non-survival.
+models:
+  logistic_regression:
+    C: 1.0
+    max_iter: 2000
+  random_forest:
+    n_estimators: 250
+    min_samples_leaf: 5
+    max_features: sqrt
+    n_jobs: 1
+  gradient_boosting:
+    max_iter: 200
+    max_leaf_nodes: 15
+    learning_rate: 0.05
+    l2_regularization: 1.0
+    early_stopping: false

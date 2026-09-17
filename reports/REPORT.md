@@ -9,7 +9,7 @@ There are 15,000 rows, 14,042 IDs, 4,815 survival labels and 10,185 non-survival
 375 IDs have conflicting outcomes. Records are retained because timestamps/provenance are unavailable; repeated IDs and exact cleaned predictor copies are joined into groups. Grouping mitigates overlap, but cannot resolve label ambiguity or establish that all records are independent patients. ID is excluded as a predictor. Favorite color is excluded because no clinical rationale is supplied. See `data_audit.json` for all counts and source checksum.
 
 ## Fair comparison
-One predefined grouped stratified split reserves 2,997 rows (about 20%) for testing; 12,003 rows remain for five-fold grouped stratified cross-validation. Every model uses identical folds and features. Median/mode imputation, scaling and one-hot encoding are fit within each training fold using pipelines. No patient group crosses partitions. Random seed is 42. Hyperparameters are fixed in advance in `candidates()`.
+One predefined grouped stratified split reserves 2,997 rows (20.0%) for testing; 12,003 rows remain for 5-fold grouped stratified cross-validation. Every model uses identical folds and features. Median/mode imputation, scaling and one-hot encoding are fit within each training fold using pipelines. No patient group crosses partitions. Random seed is 42. Hyperparameters are fixed in advance in `src/config.yaml`.
 
 Three classifiers are evaluated: logistic regression (simple linear reference), random forest (nonlinear bagged trees), and histogram gradient boosting (sequential nonlinear trees). A prior-probability dummy baseline tests whether they improve over prevalence alone. Select by training CV mean average precision for non-survival. ROC AUC assesses ranking; Brier score assesses probability error (lower is better). Accuracy alone would conceal class imbalance. CV standard deviations in `cross_validation.csv` describe fold variation, not confidence intervals.
 
@@ -43,3 +43,4 @@ This is an educational dataset with unexplained repeated IDs, conflicting labels
 Generated using Python 3.11.14 and scikit-learn 1.6.1. See the root README for exact commands. Source SHA-256: `c1cadd2f8c641bb41961c3c6df8a8447b9cfe61e2a8cf63482ab2d3aca3108f5`.
 
 Method references: [scikit-learn leakage guidance](https://scikit-learn.org/1.6/common_pitfalls.html#data-leakage), [grouped cross-validation](https://scikit-learn.org/1.6/modules/cross_validation.html#cross-validation-iterators-for-grouped-data).
+

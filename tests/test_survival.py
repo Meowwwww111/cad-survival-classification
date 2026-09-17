@@ -4,7 +4,10 @@ import pytest
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedGroupKFold
 
-from survival import CleanFeatures, load_data, make_pipeline
+from src.data_preparation import CleanFeatures, load_data, make_pipeline
+from src.data_preparation import DataPreparation
+from src.model_training import ModelTraining
+from main import load_config
 
 
 def fixture_frame(n=30):
@@ -65,3 +68,25 @@ def test_imputation_fit_on_training_only_and_unseen_category():
     assert np.isfinite(p).all()
     assert np.allclose(p.sum(axis=1), 1)
     assert imputer.statistics_[0] == 49.5
+
+
+def test_yaml_settings_reach_models_and_preprocessor():
+    config = load_config()
+    config['models']['random_forest']['n_estimators'] = 7
+    config['numerical_features'] = ['Age', 'Creatinine']
+    config['nominal_features'] = ['Gender']
+    preparation = DataPreparation(config)
+    training = ModelTraining(config, preparation)
+    forest = training.candidates()['Random forest']
+    assert forest.n_estimators == 7
+    assert forest.random_state == config['random_state']
+    pipe = preparation.make_pipeline(forest)
+    assert pipe.named_steps['prepare'].transformers[0][2] == ['Age', 'Creatinine']
+    assert pipe.named_steps['prepare'].transformers[1][2] == ['Gender']
+
+
+def test_config_rejects_identifier_predictor():
+    config = load_config()
+    config['nominal_features'].append('ID')
+    with pytest.raises(ValueError, match='supported feature'):
+        DataPreparation(config)
